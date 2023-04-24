@@ -1,0 +1,225 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header styles */
+header {
+  background-color: #ffffff;
+  padding: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+  max-width: 150px;
+  height: auto;
+}
+
+.menu-toggle {
+  display: none;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.main-nav {
+  display: flex;
+  margin-left: 30px;
+}
+
+.main-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.main-nav a:hover {
+  color: #007bff;
+}
+
+.search-bar {
+  float: right;
+  margin-top: 10px;
+  padding-right: 15px;
+}
+
+.search-bar input {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  width: 200px;
+}
+
+.search-bar button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #0056b3;
+}
+
+/* Add the following styles to your existing CSS */
+header.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slide-down 0.3s ease;
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Menu toggle when active */
+.menu-toggle.active {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.main-nav.active {
+  display: flex;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  .main-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .main-nav ul {
+    padding: 0;
+  }
+  .main-nav li {
+    display: block;
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  .main-nav li:last-child {
+    border-bottom: none;
+  }
+
+  .main-nav a {
+    display: block;
+    padding: 15px 0;
+  }
+
+  .search-bar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+}
+
+.search-bar button {
+  display: inline-block;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-bar button:hover {
+  background-color: #388e3c;
+  border-color: #388e3c;
+}
+
+.search-bar input {
+  margin-right: 5px;
+}
+
+.profile-login {
+  display: inline-block;
+}
+
+/* Update the existing CSS rules */
+/* Update the existing CSS rules */
+.profile-login-link {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.profile-login-link:hover {
+  background-color: #388e3c;
+  border-color: #388e3c;
+}
+
+.profile-login-link:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"></circle><path d="M12 21v-2.1a5 5 0 0 0-5-5c-1.7 0-3.2 1-4 2.5a10 10 0 0 1 18 0c-.8-1.5-2.2-2.5-4-2.5a5 5 0 0 0-5 5V21"></path></svg>');
+  background-size: cover;
+}

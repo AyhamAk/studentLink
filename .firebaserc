@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "studentlink-e6a9d": {
+      "hosting": {
+        "untitled": [
+          "studentlink-e6a9d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "studentlink-e6a9d"
+  }
+}
