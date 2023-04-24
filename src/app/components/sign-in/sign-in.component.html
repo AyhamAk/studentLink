@@ -1,0 +1,52 @@
+<div class="sign-in-form-popup">
+  <div class="sign-in-form-content">
+    <div class="interactive-part">
+      <img src="./assets/loginform.png" alt="Your Image Description" class="interactive-image">
+      <h2>Welcome Back!</h2>
+      <p class="welcome-text"><strong>Sign in to access your account and continue your journey.</strong></p>
+    </div>
+    <div class="login-part">
+        <form *ngIf="isLogIn">
+          <button class="close-btn" (click)="closeSignInForm($event)">×</button>
+          <h3>Sign In</h3>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input name="value" [(ngModel)]="loginEmail" type="email" id="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input name="value" [(ngModel)]="loginPassword" type="password" id="password" class="form-control" placeholder="Enter your password" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="submit-btn">Sign In</button>
+          </div>
+          <p class="switch-form-text">Don't have an account? <button class="signup-button" (click)="changeState()">Sign Up</button></p>
+        </form>
+      <form *ngIf="!isLogIn">
+        <button class="close-btn" (click)="closeSignInForm($event)">×</button>
+        <h3>Sign Up</h3>
+        <div class="form-group">
+          <label for="signup-name">Name:</label>
+          <input name="value" [(ngModel)]="signupName" type="text" id="signup-name" class="form-control" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Email:</label>
+          <input name="value" [(ngModel)]="signupEmail" type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password:</label>
+          <input name="value" [(ngModel)]="signupPassword" type="password" id="signup-password" class="form-control" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password:</label>
+          <input name="value" [(ngModel)]="signupConfirmPassword" type="password" id="confirm-password" class="form-control" placeholder="Confirm your password"
+                 required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-btn" (click)="setAccount()">Sign Up</button>
+        </div>
+        <p class="switch-form-text">Already have an account? <button class="signup-button" (click)="changeState()">Sign In</button></p>
+      </form>
+    </div>
+  </div>
+</div>
