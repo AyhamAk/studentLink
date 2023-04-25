@@ -24,7 +24,8 @@
       </div>
       <div class="profile-login">
         <!-- Update the profile-login-link -->
-        <a href="#" class="profile-login-link" (click)="openSignInForm($event)">Login</a>
+        <a href="#" class="profile-login-link" *ngIf="!getCurrentUser()" (click)="openSignInForm($event)">Sign in</a>
+        <a href="#" class="profile-login-link" *ngIf="getCurrentUser()" (click)="signOut()">Sign out</a>
       </div>
     </div>
   </div>

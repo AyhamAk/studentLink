@@ -21,6 +21,7 @@
 }
 
 .sign-in-form-content {
+  height: 450px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -156,7 +157,7 @@ form .form-control {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  width: 100%;
+  width: 98%;
 }
 .interactive-part {
   flex: 1;
@@ -213,4 +214,66 @@ form .form-control {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+.mat-tab-group {
+  position: relative;
+}
+
+.mat-tab-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #fff; /* or any other background color you want for the tabs */
+}
+.mat-tab-body-content {
+   height: 100%;
+}
+.formContainer{
+  height: 450px;
+}
+.custom-snackbar {
+  background-color: #4caf50; /* Change the background color */
+  color: #ffffff; /* Change the text color */
+  border-radius: 4px; /* Add border-radius */
+  font-weight: bold; /* Make the font bold */
+}
+
+.custom-snackbar .mat-simple-snackbar-action { /* Target the action within the custom-snackbar */
+  color: #ffffff; /* Change the action text color */
+}
+.form-group {
+  text-align: center;
+}
+
+.form-group label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  width: 50px; /* Change the width to 50px */
+  height: 50px; /* Change the height to 50px */
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.image-container input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.image-container input[type="radio"]:checked ~ img {
+  border: 2px solid #4caf50;
 }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {User} from "../../models/user";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBar } from 'src/app/services/snackBar.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -9,6 +11,7 @@ import {User} from "../../models/user";
 })
 export class SignInComponent implements OnInit {
   currentUser!:User;
+  private validEmail!: boolean;
   set isLogIn(value: boolean) {
     this._isLogIn = value;
   }
@@ -70,19 +73,21 @@ export class SignInComponent implements OnInit {
   private _signupEmail: string='';
   private _signupPassword: string='';
   private _signupConfirmPassword: string='';
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService,private snackBar: SnackBar) {
     this.currentUser={
       email:'',
       name:'',
-      password:''
+      password:'',
+      gender:''
     }
+    this.validEmail=false;
   }
 
   ngOnInit(): void {
+    this.validEmail=true;
   }
 
-  closeSignInForm(event: MouseEvent) {
-    event.preventDefault();
+  closeSignInForm() {
     const signInFormPopup = document.querySelector('.sign-in-form-popup') as HTMLElement;
     signInFormPopup.classList.remove('visible');
     setTimeout(() => {
@@ -96,6 +101,39 @@ export class SignInComponent implements OnInit {
   }
 
   setAccount() {
-    this.authenticationService.createNewAccount(this._signupEmail,this._signupPassword);
+    this.authenticationService
+      .createNewAccount(this._signupEmail, this._signupPassword)
+      .then((res) => {
+        // This will only be executed if the account is created successfully.
+        this.snackBar.openSnackBar('Congrats! You created an account. NOW you can sign in', 'Close');
+      })
+      .catch((err) => {
+        // This will only be executed if there's an error (e.g., email already exists).
+        this.snackBar.openSnackBar('This email is already in use. Please try another one', 'Close');
+      });
+  }
+  logIn() {
+    this.authenticationService
+      .login(this.loginEmail, this.loginPassword)
+      .then(() => {
+        // This will only be executed if the account is created successfully.
+        this.snackBar.openSnackBar('hey there'+this.loginEmail, 'Close');
+        this.currentUser.email=this.authenticationService.getUser()?.email;
+        this.closeSignInForm();
+      })
+      .catch((err) => {
+        // This will only be executed if there's an error (e.g., email already exists).
+        this.snackBar.openSnackBar('Sign in unsuccessful. Please check your email and password, and try again. If you\'ve forgotten your password, consider using the \'Forgot Password\' option to reset it', 'Close');
+      });
+  }
+  selectedProfilePicture!: string;
+
+  updateProfilePictureSelection(selected: number) {
+    this.selectedProfilePicture = selected === 1 ? 'male' : 'female';
+    if (this.selectedProfilePicture==='male'){
+      this.currentUser.gender='male';
+    }else {
+      this.currentUser.gender='female';
+    }
   }
 }

@@ -1,4 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AuthenticationService} from "../../services/authentication.service";
+import {SnackBar} from "../../services/snackBar.service";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('header') header!: ElementRef;
   menuActive: boolean = false;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService,private snackBar:SnackBar) { }
 
   ngOnInit(): void {
   }
@@ -33,5 +35,12 @@ export class HeaderComponent implements OnInit {
   }
   toggleMenu() {
     this.menuActive = !this.menuActive;
+  }
+  getCurrentUser(){
+    return this.authenticationService.getUser();
+  }
+  signOut(){
+    this.authenticationService.logout();
+    this.snackBar.openSnackBar('Goodbye! You have successfully signed out. See you soon!','close');
   }
 }

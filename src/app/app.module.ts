@@ -10,17 +10,18 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import {AngularFireModule} from "@angular/fire/compat";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from "@angular/material/tabs";
-import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignInComponent} from './components/sign-in/sign-in.component';
 import {AuthenticationService} from "./services/authentication.service";
 import {FormsModule} from "@angular/forms";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatDialogModule} from "@angular/material/dialog";
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainHoomePageComponent,
     MainSectionComponent,
-    SignInComponent,
-  ],
+    SignInComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -29,6 +30,8 @@ import {FormsModule} from "@angular/forms";
     BrowserAnimationsModule,
     MatTabsModule,
     FormsModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
