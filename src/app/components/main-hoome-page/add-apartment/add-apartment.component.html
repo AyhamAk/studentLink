@@ -1,0 +1,60 @@
+<div class="add-apartment-form-popup">
+  <div class="add-apartment-form-content">
+    <div class="interactive-part">
+      <img src="../../../../assets/apartment.png" alt="Your Image Description" class="interactive-image">
+      <h2>List Your Apartment !</h2>
+      <p class="welcome-text"><strong>Share key details such as location, price, and photos to attract potential renters.</strong></p>
+    </div>
+    <button class="close-btn" (click)="closeAddApartmentForm()">×</button>
+    <!--  LOGIN right pane  -->
+    <div class="add-part">
+          <form class="formContainer">
+            <br>
+            <h3>apartment details</h3>
+            <mat-stepper [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="firstFormGroup" label="About you">
+                <div class="form-group">
+                  <label>First Name:</label>
+                  <input name="value" type="text" id="name" class="form-control"
+                         placeholder="Enter your name" [(ngModel)]="name" required>
+                </div>
+                <div class="form-group">
+                  <label>Last Name:</label>
+                  <input name="value" type="text" id="lastName" class="form-control"
+                         placeholder="Enter your last name" [(ngModel)]="lastName" required>
+                </div>
+                <div class="form-group">
+                  <label>Email:</label>
+                  <input name="value" type="email" id="E-mail" class="form-control"
+                         placeholder="Enter your E-mail" [(ngModel)]="email" required>
+                </div>
+                <button mat-button matStepperNext>Next</button>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup" label="Apartment details">
+                <div class="form-group">
+                  <label for="apartment-image">Apartment Image:</label>
+                  <input id="apartment-image" type="file"accept="image/*" />
+                  <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image" [(ngModel)]="imageUrl" class="apartment-image"/>
+                </div>
+                <div class="form-group">
+                  <label for="apartment-image">Apartment location:</label>
+                  <input id="apartment-location" [(ngModel)]="location" type="text"/>
+                </div>
+                <div class="form-group">
+                  <label for="apartment-image">Apartment price:</label>
+                  <input id="apartment-price" [(ngModel)]="price"/>
+                </div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup" label="Add">
+                <div class="form-group">
+                  <button type="submit" class="submit-btn" (click)="addNewApartment()">Confirm !</button>
+                </div>
+                <button mat-button matStepperPrevious>Back</button>
+              </mat-step>
+            </mat-stepper>
+          </form>
+    </div>
+  </div>
+</div>

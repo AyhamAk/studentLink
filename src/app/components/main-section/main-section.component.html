@@ -1,24 +1,39 @@
-<div class="container">
+<div class="containers">
   <div class="row justify-content-center">
-    <div class="col-12 col-sm-10 col-md-8">
-      <h2 class="section-title text-center">Find Your New Home</h2>
+    <div>
+      <h2 class="section-title text-center">What are you searching for ?</h2>
       <div class="middle-tabs">
-      <mat-tab-group  mat-align-tabs="center">
-        <mat-tab label="apartments" class="middle-tabs">
-          <div class="apartment-cards">
-            <div class="card" *ngFor="let apartment of apartments">
-              <img class="card-img" src="{{ apartment.imageUrl }}" alt="{{ apartment.price }}">
-              <div class="card-body">
-                <h3 class="card-title">{{ apartment.owner }}</h3>
-                <p class="card-text">{{ apartment.description }}</p>
-                <a class="btn btn-primary" href="{{ apartment.location }}">View Details</a>
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Apartments" class="middle-tabs">
+            <div class="apartment-cards">
+              <div class="  card-container">
+                <div class="card" *ngFor="let apartment of apartments">
+                  <img class="card-img" src="assets/1.png" alt="{{ apartment.price }}">
+                  <div class="card-body">
+                    <h3 class="card-title">{{ apartment.owner }}</h3>
+                    <p class="card-text">{{ apartment.description }}</p>
+                    <a class="btn btn-primary" href="{{ apartment.location }}">View Details</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </mat-tab>
-        <mat-tab label="Second"> Content 2 </mat-tab>
-        <mat-tab label="Third"> Content 3 </mat-tab>
-      </mat-tab-group>
+          </mat-tab>
+          <mat-tab label="Items">
+            <div class="apartment-cards">
+              <div class="  card-container">
+                <div class="card" *ngFor="let item of items">
+                  <img class="card-img" src="assets/1.png" alt="{{ item.price }}">
+                  <div class="card-body">
+                    <h3 class="card-title">{{ item.owner }}</h3>
+                    <p class="card-text">{{ item.description }}</p>
+                    <a class="btn btn-primary" href="{{ item.location }}">View Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Third"> Content 3 </mat-tab>
+        </mat-tab-group>
       </div>
     </div>
   </div>

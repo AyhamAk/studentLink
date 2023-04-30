@@ -15,6 +15,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  dropdownOpen = false;
+
+  // Your existing component code
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     const scrollPosition = window.pageYOffset;
@@ -37,7 +44,7 @@ export class HeaderComponent implements OnInit {
     this.menuActive = !this.menuActive;
   }
   getCurrentUser(){
-    return this.authenticationService.getUser();
+    return this.authenticationService.getUser()?.email;
   }
   signOut(){
     this.authenticationService.logout();

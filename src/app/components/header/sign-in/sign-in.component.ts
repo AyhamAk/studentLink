@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "../../services/authentication.service";
-import {User} from "../../models/user";
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackBar } from 'src/app/services/snackBar.service';
+import {AuthenticationService} from "../../../services/authentication.service";
+import {User} from "../../../models/user";
+import {SnackBar} from 'src/app/services/snackBar.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,8 +9,9 @@ import { SnackBar } from 'src/app/services/snackBar.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  currentUser!:User;
+  currentUser!: User;
   private validEmail!: boolean;
+
   set isLogIn(value: boolean) {
     this._isLogIn = value;
   }
@@ -39,6 +39,7 @@ export class SignInComponent implements OnInit {
   set signupConfirmPassword(value: string) {
     this._signupConfirmPassword = value;
   }
+
   get isLogIn(): boolean {
     return this._isLogIn;
   }
@@ -66,25 +67,27 @@ export class SignInComponent implements OnInit {
   get signupConfirmPassword(): string {
     return this._signupConfirmPassword;
   }
+
   private _isLogIn: boolean = true;
-  private _loginEmail:string='';
-  private _loginPassword:string='';
-  private _signupName: string='';
-  private _signupEmail: string='';
-  private _signupPassword: string='';
-  private _signupConfirmPassword: string='';
-  constructor(private authenticationService: AuthenticationService,private snackBar: SnackBar) {
-    this.currentUser={
-      email:'',
-      name:'',
-      password:'',
-      gender:''
+  private _loginEmail: string = '';
+  private _loginPassword: string = '';
+  private _signupName: string = '';
+  private _signupEmail: string = '';
+  private _signupPassword: string = '';
+  private _signupConfirmPassword: string = '';
+
+  constructor(private authenticationService: AuthenticationService, private snackBar: SnackBar) {
+    this.currentUser = {
+      email: '',
+      name: '',
+      password: '',
+      gender: ''
     }
-    this.validEmail=false;
+    this.validEmail = false;
   }
 
   ngOnInit(): void {
-    this.validEmail=true;
+    this.validEmail = true;
   }
 
   closeSignInForm() {
@@ -103,37 +106,40 @@ export class SignInComponent implements OnInit {
   setAccount() {
     this.authenticationService
       .createNewAccount(this._signupEmail, this._signupPassword)
-      .then((res) => {
+      .then(() => {
         // This will only be executed if the account is created successfully.
         this.snackBar.openSnackBar('Congrats! You created an account. NOW you can sign in', 'Close');
       })
-      .catch((err) => {
+      .catch(() => {
         // This will only be executed if there's an error (e.g., email already exists).
         this.snackBar.openSnackBar('This email is already in use. Please try another one', 'Close');
       });
   }
+
   logIn() {
     this.authenticationService
       .login(this.loginEmail, this.loginPassword)
       .then(() => {
         // This will only be executed if the account is created successfully.
-        this.snackBar.openSnackBar('hey there'+this.loginEmail, 'Close');
-        this.currentUser.email=this.authenticationService.getUser()?.email;
+        this.snackBar.openSnackBar('hey there' + this.loginEmail, 'Close');
+
+        this.currentUser.email = this.authenticationService.getUser()?.email;
         this.closeSignInForm();
       })
-      .catch((err) => {
+      .catch(() => {
         // This will only be executed if there's an error (e.g., email already exists).
         this.snackBar.openSnackBar('Sign in unsuccessful. Please check your email and password, and try again. If you\'ve forgotten your password, consider using the \'Forgot Password\' option to reset it', 'Close');
       });
   }
+
   selectedProfilePicture!: string;
 
   updateProfilePictureSelection(selected: number) {
     this.selectedProfilePicture = selected === 1 ? 'male' : 'female';
-    if (this.selectedProfilePicture==='male'){
-      this.currentUser.gender='male';
-    }else {
-      this.currentUser.gender='female';
+    if (this.selectedProfilePicture === 'male') {
+      this.currentUser.gender = 'male';
+    } else {
+      this.currentUser.gender = 'female';
     }
   }
 }

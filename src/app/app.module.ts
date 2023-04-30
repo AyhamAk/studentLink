@@ -10,18 +10,22 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import {AngularFireModule} from "@angular/fire/compat";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from "@angular/material/tabs";
-import { SignInComponent} from './components/sign-in/sign-in.component';
-import {AuthenticationService} from "./services/authentication.service";
-import {FormsModule} from "@angular/forms";
+import { SignInComponent} from './components/header/sign-in/sign-in.component';
+import {FormBuilder, FormsModule} from "@angular/forms";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import { AddApartmentComponent } from './components/main-hoome-page/add-apartment/add-apartment.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatButtonModule} from "@angular/material/button";
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainHoomePageComponent,
     MainSectionComponent,
-    SignInComponent],
+    SignInComponent,
+    AddApartmentComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -31,9 +35,12 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatTabsModule,
     FormsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    MatStepperModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

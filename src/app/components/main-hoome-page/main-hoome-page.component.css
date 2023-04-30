@@ -1,83 +1,12 @@
-/* Reset CSS */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* Global styles */
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333;
-}
-
-a {
-  color: #0071c5;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-ul {
-  list-style: none;
-}
-
+/**/
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Header styles */
-header {
-  background-color: #0071c5;
-  color: #fff;
-  padding: 20px 0;
-}
 
-.header-left {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo img {
-  max-width: 150px;
-}
-
-nav ul {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav li {
-  margin: 0 10px;
-}
-
-nav a {
-  color: #fff;
-}
-
-.search-bar input[type="text"] {
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  font-size: 16px;
-}
-
-.search-bar button[type="submit"] {
-  background-color: #fff;
-  color: #0071c5;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  margin-left: 10px;
-}
 
 /* Banner styles */
 .banner {
@@ -89,7 +18,7 @@ nav a {
   display: flex;
   align-items: center;
 }
-
+/**/
 .banner-text {
   max-width: 500px;
 }
@@ -108,67 +37,26 @@ nav a {
 
 .btn {
   background-color: #fff;
-  color: #0071c5;
+  color:  #4caf50;
   padding: 10px 20px;
   border: none;
   border-radius: 20px;
   text-decoration: none;
+  margin-left: 5px;
+
 }
 
 .btn:hover {
-  background-color: #0071c5;
+  background-color: #4caf50;
   color: #fff;
   cursor: pointer;
 }
 
-/* Main section styles */
-section {
-  margin-bottom: 40px;
-}
-
-section h2 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-section p {
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-section ul {
-  margin-bottom: 20px;
-}
-
-/* News section styles */
-.news-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.news-item {
-  width: 30%;
-  margin-bottom: 40px;
-}
-
-.news-item img {
-  max-width: 100%;
-  margin-bottom: 10px;
-}
-
-.news-item h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.news-item p {
-  font-size: 16px;
-}
-
-/* Footer styles */
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 40px
+/**/
+.banner-btn.add-apartment::before {
+  content: "+";
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 20px;
+  font-weight: bold;
 }

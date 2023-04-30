@@ -8,9 +8,9 @@
 <body>
 <app-header></app-header>
 <app-main-hoome-page></app-main-hoome-page>
-<app-main-section [apartments]="apartments"></app-main-section>
+<app-main-section [apartments]="apartments" [items]="items"></app-main-section>
 <app-sign-in></app-sign-in>
-
+<app-add-apartment (apartmentAdded)="onApartmentAdded($event)"></app-add-apartment>
 </body>
 <!--<footer>
   <div class="footer-top">

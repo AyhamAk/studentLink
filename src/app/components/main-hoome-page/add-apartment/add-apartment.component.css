@@ -1,0 +1,340 @@
+.add-apartment-form-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.add-apartment-form-popup.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.add-apartment-form-content {
+  height: 450px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  background-image: radial-gradient(circle at 80% 10%, #E3F2FD, #A3D3FC),
+  radial-gradient(circle at 30% 80%, white, #0077B6,white);}
+.add-apartment-form-content::before {
+  top: -50px;
+  left: -50px;
+}
+.add-apartment-form-content::before,
+.add-apartment-form-content::after {
+  content: "";
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.add-apartment-form-content::before {
+  top: 15px;
+  left: 240px
+}
+
+.add-apartment-form-content::after {
+  bottom: 15px;
+  right: 240px;
+}
+
+.add-apartment-form-popup.visible .add-apartment-form-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #999;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #449d44;
+}
+
+form .form-group {
+  margin-bottom: 20px;
+}
+
+form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form .form-control {
+  display: block;
+  width: 94%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  text-align: center;
+}
+
+.form-control {
+  display: block;
+  width: 94%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  text-align: center;
+}
+
+.submit-btn {
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #449d44;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  width: 100%;
+  text-align: center;
+}
+
+.submit-btn:hover {
+  background-color: #389539;
+}
+
+.submit-btn:focus {
+  outline: none;
+}
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 98%;
+}
+.interactive-part {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 5px 0 0 5px;
+  position: relative;
+}
+
+
+.interactive-part h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.interactive-part p {
+  font-size: 16px;
+  text-align: center;
+}
+
+.add-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20px;
+  overflow: auto;
+  width: 70%;
+}
+
+.add-part h3 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.interactive-image {
+  max-width: 120%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.welcome-text {
+  color: white;
+  font-size: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.signup-button {
+  background-color: transparent;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.mat-tab-group {
+  position: relative;
+}
+
+.mat-tab-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #fff; /* or any other background color you want for the tabs */
+}
+.mat-tab-body-content {
+  height: 100%;
+}
+.formContainer{
+  height: 450px;
+}
+.custom-snackbar {
+  background-color: #4caf50; /* Change the background color */
+  color: #ffffff; /* Change the text color */
+  border-radius: 4px; /* Add border-radius */
+  font-weight: bold; /* Make the font bold */
+}
+
+.custom-snackbar .mat-simple-snackbar-action { /* Target the action within the custom-snackbar */
+  color: #ffffff; /* Change the action text color */
+}
+.form-group {
+  text-align: center;
+}
+
+.form-group label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  width: 50px; /* Change the width to 50px */
+  height: 50px; /* Change the height to 50px */
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.image-container input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.image-container input[type="radio"]:checked ~ img {
+  border: 2px solid #4caf50;
+}
+.card {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.image-loader {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.image-loader input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-loader img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.input-group {
+  margin: 20px 0;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0b7dda;
+}
+.apartment-image{
+  width: 110px;
+  height: 90px;
+}
+.mat-stepper-horizontal {
+  display: block;
+  background: none;
+}
