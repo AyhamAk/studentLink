@@ -71,13 +71,13 @@ export class ApartmentService implements OnInit {
     }
   }
 
-  async addNewApartment(name: string, lastName: string, price: number, location: string, imageUrl:  string | ArrayBuffer | null) {
-    const apartmentName = name + lastName + 'apartment';
+  async addNewApartment(owner:{firstName:string,lastName:string}, price: number, location: string,description:string, imageUrl:  string | ArrayBuffer | null) {
+    const apartmentName = owner.firstName +' '+ owner.lastName +' ' + 'apartment';
     await setDoc(doc(db, "apartments", apartmentName), {
       price: price,
-      owner: name + ' ' + lastName,
+      owner:owner,
       location: location,
-      description: 'please join',
+      description: description,
       imageUrl: '/assets/' + imageUrl + '.png'
     });
   }

@@ -18,6 +18,7 @@ import {MatInputModule} from "@angular/material/input";
 import { AddApartmentComponent } from './components/main-hoome-page/add-apartment/add-apartment.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatDialogModule,
     MatInputModule,
     MatStepperModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent]
