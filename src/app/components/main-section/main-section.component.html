@@ -1,4 +1,5 @@
 <div class="mainSectionontainer">
+  <img mat-card-avatar class="example-header-image" id="testing1">
   <div class="row justify-content-center">
     <div class="search-section">
       <h2 class="section-title text-center">What are you searching for?</h2>
@@ -9,11 +10,11 @@
               <div class="apartment-cards" *ngFor="let apartment of apartments">
                 <mat-card class="mat-card">
                   <mat-card-header>
-                    <div mat-card-avatar class="example-header-image" id="testing"></div>
+                    <img mat-card-avatar class="example-header-image" src="{{apartment.userProfilePictureUrl}}">
                     <mat-card-title>{{apartment.owner?.firstName + ' ' +apartment.owner?.lastName}}</mat-card-title>
                     <mat-card-subtitle>{{apartment.location}}</mat-card-subtitle>
                   </mat-card-header>
-                  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                  <img mat-card-image src="{{apartment.imageDownloadUrl}}" class="mat-card-image" alt="Photo of a Shiba Inu">
                   <mat-card-content>
                     <p>
                       {{apartment.description}}

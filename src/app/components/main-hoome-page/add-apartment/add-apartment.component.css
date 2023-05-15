@@ -338,3 +338,23 @@ input:focus {
   display: block;
   background: none;
 }
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.interactive-image {
+  animation: breathe 2s infinite;
+}

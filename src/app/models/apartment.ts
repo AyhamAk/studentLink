@@ -3,8 +3,8 @@ export class Apartment {
   location!: string;
   description !: string;
   owner!: { firstName: string, lastName: string };
-  imageUrl!:  string | ArrayBuffer | null;
-
+  imageDownloadUrl!: string;
+  userProfilePictureUrl!:string;
   constructor() {
   }
 }

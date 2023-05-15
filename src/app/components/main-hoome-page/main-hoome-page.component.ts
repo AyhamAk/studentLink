@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-main-hoome-page',
@@ -7,13 +7,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MainHoomePageComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor(private renderer: Renderer2, private el: ElementRef) { }
 
   ngOnInit(): void {
   }
 
-//TODO swal / https://mdbootstrap.com/docs/angular/components/modal/
   openAddApartment(event: MouseEvent) {
     event.preventDefault();
     const signInFormPopup = document.querySelector('.add-apartment-form-popup') as HTMLElement;
@@ -23,4 +21,5 @@ export class MainHoomePageComponent implements OnInit {
     }, 50);
     document.body.style.overflow = 'hidden';
   }
+
 }

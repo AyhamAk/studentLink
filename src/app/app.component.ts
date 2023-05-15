@@ -3,6 +3,8 @@ import {Apartment} from "./models/apartment";
 import {AuthenticationService} from "./services/authentication.service";
 import {ApartmentService} from "./services/apartment-service";
 import {Item} from "./models/item";
+import {User} from "./models/user";
+import {userService} from "./services/user.service";
 
 
 @Component({
@@ -13,23 +15,33 @@ import {Item} from "./models/item";
 export class AppComponent implements OnInit {
   apartments!: Apartment[];
   items!: Item[];
-
-  constructor(private apartmentService:ApartmentService,private authenticationService: AuthenticationService) {
+  users!:User[];
+  profilePictureUrl!: string;
+  constructor(private authenticationService: AuthenticationService,private apartmentService:ApartmentService,private userService:userService) {
   }
 
   async ngOnInit(): Promise<void> {
     this.apartments = await this.apartmentService.getApartments();
     this.items = await this.apartmentService.getItems();
-  }
-
-  async refreshApartmentList(): Promise<void> {
-    this.apartments = await this.apartmentService.getApartments();
-    this.items = await this.apartmentService.getItems();
+    this.users=await this.userService.getUsers();
+    this.profilePictureUrl='';
+    this.getUserProfilePicture();
   }
 
   async onApartmentAdded(apartment:Apartment): Promise<void> {
-    await this.apartmentService.addNewApartment(apartment.owner,apartment.price,apartment.location,apartment.description,apartment.imageUrl);
+    await this.apartmentService.addNewApartment(apartment.owner,apartment.price,apartment.location,apartment.description,apartment.imageDownloadUrl,apartment.userProfilePictureUrl);
     this.apartments = await this.apartmentService.getApartments();
+  }
+  async onUserAdded(user:User):Promise<void>{
+    await this.userService.addNewUser(user.name,user.email,user.password,user.profilePictureUrl);
+    this.users=await this.userService.getUsers();
+  }
+  getUserProfilePicture(){
+    this.users.forEach(user=>{
+      if (user.email===this.authenticationService.getUser()?.email){
+        this.profilePictureUrl=user.profilePictureUrl;
+      }
+    });
   }
 }
 

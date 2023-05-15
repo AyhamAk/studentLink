@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from "../../../services/authentication.service";
 import {User} from "../../../models/user";
 import {SnackBar} from 'src/app/services/snackBar.service';
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {userService} from "../../../services/user.service";
+import {Apartment} from "../../../models/apartment";
 
 @Component({
   selector: 'app-sign-in',
@@ -9,13 +12,39 @@ import {SnackBar} from 'src/app/services/snackBar.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+  @Output() private userAdded = new EventEmitter<User>();
+
+  get firstName(): string {
+    return this._firstName;
+  }
+
+  set firstName(value: string) {
+    this._firstName = value;
+  }
+
+  get lastName(): string {
+    return this._lastName;
+  }
+
+  set lastName(value: string) {
+    this._lastName = value;
+  }
   currentUser!: User;
   private validEmail!: boolean;
+  private imageUrl = '';
+  _loadImageUrl: string | ArrayBuffer | null = null;
 
   set isLogIn(value: boolean) {
     this._isLogIn = value;
   }
 
+  get loadImageUrl(): ArrayBuffer {
+    return <ArrayBuffer>this._loadImageUrl;
+  }
+
+  set loadImageUrl(value: string | ArrayBuffer | null) {
+    this._loadImageUrl = value;
+  }
   set loginEmail(value: string) {
     this._loginEmail = value;
   }
@@ -75,13 +104,14 @@ export class SignInComponent implements OnInit {
   private _signupEmail: string = '';
   private _signupPassword: string = '';
   private _signupConfirmPassword: string = '';
-
-  constructor(private authenticationService: AuthenticationService, private snackBar: SnackBar) {
+  private _firstName='';
+  private _lastName='';
+  constructor(private authenticationService: AuthenticationService, private snackBar: SnackBar,private userService:userService) {
     this.currentUser = {
       email: '',
       name: '',
       password: '',
-      gender: ''
+      profilePictureUrl:''
     }
     this.validEmail = false;
   }
@@ -106,9 +136,10 @@ export class SignInComponent implements OnInit {
   setAccount() {
     this.authenticationService
       .createNewAccount(this._signupEmail, this._signupPassword)
-      .then(() => {
+      .then(async () => {
         // This will only be executed if the account is created successfully.
         this.snackBar.openSnackBar('Congrats! You created an account. NOW you can sign in', 'Close');
+        await this.addNewUser();
       })
       .catch(() => {
         // This will only be executed if there's an error (e.g., email already exists).
@@ -122,8 +153,8 @@ export class SignInComponent implements OnInit {
       .then(() => {
         // This will only be executed if the account is created successfully.
         this.snackBar.openSnackBar('hey there' + this.loginEmail, 'Close');
-
-        this.currentUser.email = this.authenticationService.getUser()?.email;
+        this.currentUser.email = this.
+        authenticationService.getUser()?.email;
         this.closeSignInForm();
       })
       .catch(() => {
@@ -132,14 +163,42 @@ export class SignInComponent implements OnInit {
       });
   }
 
-  selectedProfilePicture!: string;
+  async onImageSelected(event: any) {
+    const storage = getStorage();
+    this.imageUrl = '/images/profilepicutes/' + this.signupEmail + '.jpg';
+    const storageRef = ref(storage, 'images/profilepicutes/' + this.signupEmail + '.jpg');
+    const file = event.target.files[0];
+    if (file) {
+      // Create file metadata including the content type
+      const metadata = {
+        contentType: file.type,
+      };
 
-  updateProfilePictureSelection(selected: number) {
-    this.selectedProfilePicture = selected === 1 ? 'male' : 'female';
-    if (this.selectedProfilePicture === 'male') {
-      this.currentUser.gender = 'male';
-    } else {
-      this.currentUser.gender = 'female';
+      try {
+        // Upload the file and metadata
+        await uploadBytes(storageRef, file, metadata);
+        console.log('Image uploaded successfully to Firebase Storage.');
+
+        // Display the uploaded image
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.loadImageUrl = e.target?.result as string | ArrayBuffer | null;
+        };
+        reader.readAsDataURL(file);
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
     }
+  }
+  async addNewUser() {
+    const storage = getStorage();
+    const image_download_url = await getDownloadURL(ref(storage, '/images/profilepicutes/' + this.signupEmail + '.jpg'));
+    const user: User = {
+      email:this.signupEmail,
+      name:this.firstName,
+      password:this.signupPassword,
+      profilePictureUrl:image_download_url
+    }
+    this.userAdded.emit(user);
   }
 }

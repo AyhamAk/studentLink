@@ -30,7 +30,8 @@ export class ApartmentService implements OnInit {
         owner: element['owner'],
         location: element['location'],
         description: element['description'],
-        imageUrl: element['imageUrl']
+        imageDownloadUrl: element['imageDownloadUrl'],
+        userProfilePictureUrl:element['userProfilePictureUrl']
       };
       this.apartments.push(apartment);
     })
@@ -71,14 +72,18 @@ export class ApartmentService implements OnInit {
     }
   }
 
-  async addNewApartment(owner:{firstName:string,lastName:string}, price: number, location: string,description:string, imageUrl:  string | ArrayBuffer | null) {
+  async addNewApartment(owner: {
+    firstName: string;
+    lastName: string
+  }, price: number, location: string, description: string, image_download_url: string, userProfilePictureUrl: string | undefined) {
     const apartmentName = owner.firstName +' '+ owner.lastName +' ' + 'apartment';
     await setDoc(doc(db, "apartments", apartmentName), {
       price: price,
       owner:owner,
       location: location,
       description: description,
-      imageUrl: '/assets/' + imageUrl + '.png'
+      imageDownloadUrl: image_download_url,
+      userProfilePictureUrl:userProfilePictureUrl
     });
   }
 }

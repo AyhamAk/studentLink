@@ -187,3 +187,6 @@
     grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   }
 }
+.mat-card-image{
+  height: 250px;
+}

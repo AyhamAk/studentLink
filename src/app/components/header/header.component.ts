@@ -1,4 +1,5 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import { getAuth } from 'firebase/auth';
 import {AuthenticationService} from "../../services/authentication.service";
 import {SnackBar} from "../../services/snackBar.service";
 
@@ -8,20 +9,16 @@ import {SnackBar} from "../../services/snackBar.service";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Input() profilePictureUrl!:string;
   @ViewChild('header') header!: ElementRef;
   menuActive: boolean = false;
-
+  activeUserEmail!:string;
   constructor(private authenticationService: AuthenticationService,private snackBar:SnackBar) { }
 
   ngOnInit(): void {
+    this.getUserProfilePicture();
   }
   dropdownOpen = false;
-
-  // Your existing component code
-
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     const scrollPosition = window.pageYOffset;
@@ -49,5 +46,8 @@ export class HeaderComponent implements OnInit {
   signOut(){
     this.authenticationService.logout();
     this.snackBar.openSnackBar('Goodbye! You have successfully signed out. See you soon!','close');
+  }
+  getUserProfilePicture(){
+    console.log(this.getCurrentUser());
   }
 }

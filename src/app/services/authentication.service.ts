@@ -9,7 +9,7 @@ import { app } from "src/environments/environment";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private readonly authentication;
+  readonly authentication;
 
   constructor() {
     this.authentication = getAuth(app);

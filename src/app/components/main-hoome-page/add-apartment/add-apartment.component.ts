@@ -12,13 +12,16 @@ import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
   styleUrls: ['./add-apartment.component.css']
 })
 export class AddApartmentComponent implements OnInit {
+  private imageUrl = '';
+
   get loadImageUrl(): ArrayBuffer {
     return <ArrayBuffer>this._loadImageUrl;
   }
 
-  set loadImageUrl(value:string | ArrayBuffer | null) {
+  set loadImageUrl(value: string | ArrayBuffer | null) {
     this._loadImageUrl = value;
   }
+
   get location(): string {
     return this._location;
   }
@@ -82,9 +85,9 @@ export class AddApartmentComponent implements OnInit {
 
 
   _loadImageUrl: string | ArrayBuffer | null = null;
-  private _description!: string ;
+  private _description!: string;
   private _location = '';
-  private _price: number =0;
+  private _price: number = 0;
   private _email = '';
   private _name = '';
   private _lastName = '';
@@ -99,17 +102,18 @@ export class AddApartmentComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
-              private ref: ChangeDetectorRef,
-              private apartmentService: ApartmentService,
-              private firebaseService:FirebaseService) {
+              private ref: ChangeDetectorRef,) {
   }
 
   ngOnInit(): void {
+    this.cleanProperties();
+    console.log(this.authenticationService.getUser()?.email);
   }
 
   async onImageSelected(event: any) {
-    const storage=getStorage();
-    const storageRef = ref(storage, 'images/'+this.name+this.lastName+'.jpg');
+    const storage = getStorage();
+    this.imageUrl = 'images/' + this.name + this.lastName + '.jpg';
+    const storageRef = ref(storage, 'images/' + this.name + this.lastName + '.jpg');
     const file = event.target.files[0];
     if (file) {
       // Create file metadata including the content type
@@ -132,7 +136,6 @@ export class AddApartmentComponent implements OnInit {
         console.error('Error uploading image:', error);
       }
     }
-    this.downloadImgFromStorage('images/'+this.name+this.lastName+'.jpg','testing')
   }
 
   closeAddApartmentForm() {
@@ -150,37 +153,51 @@ export class AddApartmentComponent implements OnInit {
   }
 
   async addNewApartment() {
-    const apartment:Apartment={
-      owner: {firstName:this.name ,lastName: this.lastName},
-      location:this.location,
-      price:this.price,
-      description:this.description,
-      imageUrl:this.loadImageUrl
+    // this.downloadImgFromStorage('images/'+this.name+this.lastName+'.jpg','testing1')
+    const storage = getStorage();
+    const image_download_url = await getDownloadURL(ref(storage, 'images/' + this.name + this.lastName + '.jpg'));
+    const profile_pic_image_url = await getDownloadURL(ref(storage, 'images/profilepicutes/' + this.email + '.jpg'));
+    const apartment: Apartment = {
+      owner: {firstName: this.name, lastName: this.lastName},
+      location: this.location,
+      price: this.price,
+      description: this.description,
+      imageDownloadUrl: image_download_url,
+      userProfilePictureUrl:profile_pic_image_url
     }
     this._apartmentAdded.emit(apartment);
   }
-  downloadImgFromStorage(url:string,elementId:string){
-    const storage = getStorage();
+
+  downloadImgFromStorage(url: string, elementId: string) {
     // replace the url with the name of the doc in the storage
-    getDownloadURL(ref(storage, url))
-      .then((url) => {
-        // `url` is the download URL for 'images/stars.jpg'
+    // getDownloadURL(ref(storage, url))
+    //   .then((url) => {
+    //     // `url` is the download URL for 'images/stars.jpg'
+    //
+    //     // This can be downloaded directly:
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.responseType = 'blob';
+    //     xhr.onload = (event) => {
+    //       const blob = xhr.response;
+    //     };
+    //     xhr.open('GET', url);
+    //     xhr.send();
+    //
+    //     // Or inserted into an <img> element
+    //     const img = document.getElementById('testing1');
+    //     img?.setAttribute('src', url);
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors
+    //   });
+  }
 
-        // This can be downloaded directly:
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = (event) => {
-          const blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();
-
-        // Or inserted into an <img> element
-        const img = document.getElementById('testing');
-        img?.setAttribute('src', url);
-      })
-      .catch((error) => {
-        // Handle any errors
-      });
+  private cleanProperties() {
+    this.name = '';
+    this.lastName = '';
+    this.description = '';
+    this.loadImageUrl = '';
+    this.location = '';
+    this.email = '';
   }
 }
