@@ -46,20 +46,4 @@ export class FirebaseService implements OnInit {
         // Handle any errors
       });
   }
-
-  uploadDataFromStorage(loadImageUrl: string){
-   /* const storage = getStorage();
-    const storageRef = ref(storage, 'some-child');
-
-// 'file' comes from the Blob or File API
-    uploadBytes(storageRef, loadImageUrl).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
-    });*/
-    const storage = getStorage();
-    const mountainsRef = ref(storage, 'mountains.jpg');
-    const message = 'This is my message.';
-    uploadString(mountainsRef, message).then((snapshot) => {
-      console.log('Uploaded a raw string!');
-    });
-  }
 }

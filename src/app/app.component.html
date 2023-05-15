@@ -6,10 +6,10 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet">
 </head>
 <body>
-<app-header [profilePictureUrl]="profilePictureUrl"></app-header>
+<app-header [profilePictureUrl]="profilePictureUrl" [users]="users"></app-header>
 <app-main-hoome-page></app-main-hoome-page>
 <app-main-section [apartments]="apartments" [items]="items" [users]="users"></app-main-section>
-<app-sign-in (userAdded)="onUserAdded($event)"></app-sign-in>
+<app-sign-in (profilePictureChange)="profilePictureUrl" (userAdded)="onUserAdded($event)" [users]="users"></app-sign-in>
 <app-add-apartment (_apartmentAdded)="onApartmentAdded($event)"></app-add-apartment>
 </body>
 <!--<footer>

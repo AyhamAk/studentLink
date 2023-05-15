@@ -1,62 +1,148 @@
 
-/**/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Apply the font throughout the document */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Gradient text */
+.banner-title, .banner-subtitle {
+  font-weight: bold; /* Makes the text bolder */
+  background: linear-gradient(to right, #2c3e50, #1a1a1a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Styles for banner */
+.banner {
+  background: #f5f5f5; /* Change according to your preference */
+  padding-top: 14%;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
-}
-
-
-
-/* Banner styles */
-.banner {
-  background-image: url('/assets/shutterstock_520698799small.jpg');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 780px;
+  padding: 20px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
 }
-/**/
+
+
+/* Styles for text */
 .banner-text {
-  max-width: 500px;
+  text-align: center;
 }
 
-.banner-text h1 {
-  font-size: 60px;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px #000;
+.banner-title {
+  font-size: 2em;
+  margin-bottom: 0.5em;
 }
 
-.banner-text p {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px #000;
+.banner-subtitle {
+  font-size: 1.5em;
+  margin-bottom: 1em;
 }
 
+/* Styles for buttons */
 .btn {
-  background-color: #fff;
-  color:  #4caf50;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
+  display: inline-block;
+  padding: 12px 24px;
+  margin-right: 10px;
+  font-size: 1em;
   text-decoration: none;
-  margin-left: 5px;
-
+  background: linear-gradient(to right, #bdc3c7, #2c3e50); /* Gradient from light gray to dark gray */
+  color: #fff;
+  border-radius: 50px; /* Makes the buttons look like pills */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
 
 .btn:hover {
-  background-color: #4caf50;
+  background: linear-gradient(to right, #2c3e50, #1a1a1a);
+  transform: scale(1.05); /* Button grows slightly on hover */
   color: #fff;
-  cursor: pointer;
+  text-decoration: none;
 }
 
-/**/
-.banner-btn.add-apartment::before {
-  content: "+";
-  display: inline-block;
-  margin-right: 5px;
-  font-size: 20px;
-  font-weight: bold;
+/* To prevent the last button from having a right margin */
+.button-group .btn:last-child {
+  margin-right: 0;
+}
+
+/* To prevent the last button from having a right margin */
+.button-group .btn:last-child {
+  margin-right: 0;
+}
+
+/* Styles for left and right sections */
+.left-section{
+  width: 100%;
+}
+.right-section {
+  width: 150%;
+}
+
+.right-section img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .left-section{
+    width: 50%;
+  }
+  .right-section {
+    width: 45%; /* Adjust the width here to suit your needs */
+  }
+}
+
+
+.banner-text {
+  text-align: left;
+}
+
+.header {
+  padding: 0 3rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__title {
+  flex: 1;
+  max-width: 115rem;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  row-gap: 2rem;
+  align-content: center;
+  justify-content: center;
+
+  align-items: start;
+  justify-items: start;
+}
+
+h1 {
+  font-size: 5.5rem;
+  line-height: 1.35;
+}
+
+h4 {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.header__img {
+  width: 100%;
+  grid-column: 2 / 3;
+  grid-row: 1 / span 4;
+  transform: translateY(-2rem);
+}
+.ledtSide{
+  padding-left: 35%;
+
 }

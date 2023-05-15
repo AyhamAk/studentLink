@@ -19,6 +19,7 @@ import { AddApartmentComponent } from './components/main-hoome-page/add-apartmen
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import {MatCardModule} from "@angular/material/card";
     MatInputModule,
     MatStepperModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent]

@@ -1,13 +1,6 @@
-import {FirebaseApp} from "firebase/app";
-import {
-  createUserWithEmailAndPassword, getAuth,
-  signInWithEmailAndPassword, onAuthStateChanged,
-  signOut, sendPasswordResetEmail} from "firebase/auth";
 import {Injectable} from "@angular/core";
-import {app, db} from "src/environments/environment";
+import {db} from "src/environments/environment";
 import {collection, doc, getDocs, setDoc} from "firebase/firestore";
-import {Item} from "../models/item";
-import {Apartment} from "../models/apartment";
 import {User} from "../models/user";
 @Injectable({
   providedIn: 'root'
@@ -42,4 +35,5 @@ export class userService {
       profilePictureUrl:profilePictureUrl
     });
   }
+
 }

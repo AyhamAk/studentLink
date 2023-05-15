@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from "../../../services/authentication.service";
 import {User} from "../../../models/user";
 import {SnackBar} from 'src/app/services/snackBar.service';
@@ -13,7 +13,10 @@ import {Apartment} from "../../../models/apartment";
 })
 export class SignInComponent implements OnInit {
   @Output() private userAdded = new EventEmitter<User>();
+  @Input() users!:User[];
+  @Output() private profilePictureChange = new EventEmitter<string>();
 
+  profilePictureUrl!:string;
   get firstName(): string {
     return this._firstName;
   }
@@ -155,6 +158,7 @@ export class SignInComponent implements OnInit {
         this.snackBar.openSnackBar('hey there' + this.loginEmail, 'Close');
         this.currentUser.email = this.
         authenticationService.getUser()?.email;
+        this.getUserProfilePicture();
         this.closeSignInForm();
       })
       .catch(() => {
@@ -200,5 +204,14 @@ export class SignInComponent implements OnInit {
       profilePictureUrl:image_download_url
     }
     this.userAdded.emit(user);
+  }
+  getUserProfilePicture(){
+    this.users.forEach(user=>{
+      if (user.email===this.authenticationService.getUser()?.email){
+        this.profilePictureChange.emit(user.profilePictureUrl);
+        return;
+      }
+    });
+    return '';
   }
 }

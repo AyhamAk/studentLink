@@ -3,20 +3,9 @@
     <div class="header-content">
       <div class="header-left">
         <div class="logo">
-          <a href="#"><img src="/assets/logo.png" alt="College Logo"></a>
+          <a href="#"><img src="/assets/campusCabins.png" alt="College Logo"></a>
         </div>
         <button class="menu-toggle" (click)="toggleMenu()">Menu</button>
-        <nav class="main-nav" [ngClass]="{'active': menuActive}">
-          <ul>
-            <li><a>About</a></li>
-            <li><a>Academics</a></li>
-            <li><a>Research</a></li>
-            <li><a>Community Engagement</a></li>
-            <li><a>Alumni</a></li>
-            <li><a>News &amp; Events</a></li>
-            <li><a>Contact Us</a></li>
-          </ul>
-        </nav>
       </div>
       <div class="header-right">
         <div class="search-bar">
@@ -28,13 +17,13 @@
           <a href="#" class="profile-login-link" *ngIf="!getCurrentUser()" (click)="openSignInForm($event)">Sign in</a>
           <a href="#" class="profile-login-link" *ngIf="getCurrentUser()" (click)="signOut()">Sign out</a>
         </div>
-        <div class="profile-info">
-          <div class="profile-picture-wrapper">
-            <div class="profile-picture">
-              <img src="{{profilePictureUrl}}" alt="User Profile Picture">
+        <div class="profile-info" *ngFor="let user of users">
+          <div *ngIf="user.email===getCurrentUser()" class="profile-picture-wrapper">
+            <div class="profile-picture" >
+              <img *ngIf="getCurrentUser()" src="{{user.email===getCurrentUser()?user.profilePictureUrl:' '}}" alt="User Profile Picture">
             </div>
           </div>
-          <div class="profile-email">
+          <div class="profile-email"  *ngIf="user.email===getCurrentUser()">
             <span>{{getCurrentUser()}}</span>
           </div>
         </div>
