@@ -5,6 +5,7 @@ import {ApartmentService} from "../../../services/apartment-service";
 import {Apartment} from "../../../models/apartment";
 import {FirebaseService} from "../../../services/firebase.service";
 import {getDownloadURL, getStorage, ref, uploadBytes} from 'firebase/storage';
+import {SnackBar} from "../../../services/snackBar.service";
 
 @Component({
   selector: 'app-add-apartment',
@@ -102,7 +103,8 @@ export class AddApartmentComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
-              private ref: ChangeDetectorRef,) {
+              private ref: ChangeDetectorRef,
+              private snackBar:SnackBar) {
   }
 
   ngOnInit(): void {
@@ -165,7 +167,9 @@ export class AddApartmentComponent implements OnInit {
       imageDownloadUrl: image_download_url,
       userProfilePictureUrl:profile_pic_image_url
     }
-    this._apartmentAdded.emit(apartment);
+    await this._apartmentAdded.emit(apartment);
+    this.snackBar.openSnackBar('Apartment Added Successfully!','true')
+    this.closeAddApartmentForm();
   }
 
   downloadImgFromStorage(url: string, elementId: string) {
