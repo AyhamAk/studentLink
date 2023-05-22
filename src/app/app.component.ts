@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   async onApartmentAdded(apartment:Apartment): Promise<void> {
-    await this.apartmentService.addNewApartment(apartment.owner,apartment.price,apartment.location,apartment.description,apartment.imageDownloadUrl,apartment.userProfilePictureUrl);
+    await this.apartmentService.addNewApartment(apartment.owner,apartment.price,apartment.location,apartment.description,apartment.imageDownloadUrl,apartment.userProfilePictureUrl,apartment.ownerId);
     this.apartments = await this.apartmentService.getApartments();
   }
   async onUserAdded(user:User):Promise<void>{

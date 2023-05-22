@@ -5,6 +5,7 @@ export class Apartment {
   owner!: { firstName: string, lastName: string };
   imageDownloadUrl!: string;
   userProfilePictureUrl!:string;
+  ownerId!:string;
   constructor() {
   }
 }

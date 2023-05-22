@@ -13,6 +13,13 @@ import {SnackBar} from "../../../services/snackBar.service";
   styleUrls: ['./add-apartment.component.css']
 })
 export class AddApartmentComponent implements OnInit {
+  get ownerId(): string {
+    return this._ownerId;
+  }
+
+  set ownerId(value: string) {
+    this._ownerId = value;
+  }
   private imageUrl = '';
 
   get loadImageUrl(): ArrayBuffer {
@@ -92,6 +99,7 @@ export class AddApartmentComponent implements OnInit {
   private _email = '';
   private _name = '';
   private _lastName = '';
+  private _ownerId='';
   private _firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -165,7 +173,8 @@ export class AddApartmentComponent implements OnInit {
       price: this.price,
       description: this.description,
       imageDownloadUrl: image_download_url,
-      userProfilePictureUrl:profile_pic_image_url
+      userProfilePictureUrl:profile_pic_image_url,
+      ownerId:this.ownerId
     }
     await this._apartmentAdded.emit(apartment);
     this.snackBar.openSnackBar('Apartment Added Successfully!','true')

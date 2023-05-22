@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {collection, doc, getDocs, setDoc} from "firebase/firestore";
+import {collection, deleteDoc, doc, getDocs, setDoc} from "firebase/firestore";
 import {db} from "../../environments/environment";
 import {Apartment} from "../models/apartment";
 import {Item} from "../models/item";
@@ -18,7 +18,7 @@ export class ApartmentService implements OnInit {
   }
 
   async getApartments() {
-    this.apartments=[];
+    this.apartments = [];
     // get apartments data
     const apartmentsCol = collection(db, 'apartments');
     const information = await getDocs(apartmentsCol);
@@ -31,7 +31,8 @@ export class ApartmentService implements OnInit {
         location: element['location'],
         description: element['description'],
         imageDownloadUrl: element['imageDownloadUrl'],
-        userProfilePictureUrl:element['userProfilePictureUrl']
+        userProfilePictureUrl: element['userProfilePictureUrl'],
+        ownerId: element['ownerId']
       };
       this.apartments.push(apartment);
     })
@@ -75,15 +76,21 @@ export class ApartmentService implements OnInit {
   async addNewApartment(owner: {
     firstName: string;
     lastName: string
-  }, price: number, location: string, description: string, image_download_url: string, userProfilePictureUrl: string | undefined) {
-    const apartmentName = owner.firstName +' '+ owner.lastName +' ' + 'apartment';
+  }, price: number, location: string, description: string, image_download_url: string, userProfilePictureUrl: string | undefined, ownerId: string) {
+    const apartmentName = owner.firstName + ' ' + owner.lastName + ' ' + 'apartment';
     await setDoc(doc(db, "apartments", apartmentName), {
       price: price,
-      owner:owner,
+      owner: owner,
       location: location,
       description: description,
       imageDownloadUrl: image_download_url,
-      userProfilePictureUrl:userProfilePictureUrl
+      userProfilePictureUrl: userProfilePictureUrl,
+      ownerId: ownerId
     });
+  }
+  async deleteapartment(ownerName:string,ownerId: string) {
+    for (const apartment of this.apartments) {
+      apartment.ownerId===ownerId?await deleteDoc(doc(db, "apartments", ownerName)):'';
+    }
   }
 }

@@ -17,14 +17,16 @@
           <a href="#" class="profile-login-link" *ngIf="!getCurrentUser()" (click)="openSignInForm($event)">Sign in</a>
           <a href="#" class="profile-login-link" *ngIf="getCurrentUser()" (click)="signOut()">Sign out</a>
         </div>
-        <div class="profile-info" *ngFor="let user of users">
-          <div *ngIf="user.email===getCurrentUser()" class="profile-picture-wrapper">
-            <div class="profile-picture" >
-              <img *ngIf="getCurrentUser()" src="{{user.email===getCurrentUser()?user.profilePictureUrl:' '}}" alt="User Profile Picture">
+        <div *ngIf="getCurrentUser()">
+          <div class="profile-info" *ngFor="let user of users">
+            <div *ngIf="user.email===getCurrentUser()" class="profile-picture-wrapper">
+              <div class="profile-picture" >
+                <img *ngIf="getCurrentUser()" src="{{user.email===getCurrentUser()?user.profilePictureUrl:' '}}" alt="User Profile Picture">
+              </div>
             </div>
-          </div>
-          <div class="profile-email"  *ngIf="user.email===getCurrentUser()">
-            <span>{{getCurrentUser()}}</span>
+            <div class="profile-email"  *ngIf="user.email===getCurrentUser()">
+              <span>{{getCurrentUser()}}</span>
+            </div>
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@
   transform: scale(1);
 }
 .add-apartment-form-content {
-  height: 450px;
+  height: 70%;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -33,8 +33,8 @@
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  background-image: radial-gradient(circle at 80% 10%, #E3F2FD, #A3D3FC),
-  radial-gradient(circle at 30% 80%, white, #0077B6,white);}
+  background-image: radial-gradient(circle at 80% 10%, #bdc3c7, #2c3e50),
+  radial-gradient(circle at 30% 80%, white, #2c3e50, white)}
 .add-apartment-form-content::before {
   top: -50px;
   left: -50px;
@@ -231,7 +231,7 @@ form .form-control {
   height: 100%;
 }
 .formContainer{
-  height: 450px;
+  height: 100%;
 }
 .custom-snackbar {
   background-color: #4caf50; /* Change the background color */
@@ -343,18 +343,10 @@ input:focus {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.2);
-  }
-}
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+    transform: scale(1.1);
   }
 }
 
 .interactive-image {
-  animation: breathe 2s infinite;
+  animation: breathe 6s infinite;
 }

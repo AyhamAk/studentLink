@@ -34,8 +34,8 @@
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  background-image: radial-gradient(circle at 80% 10%, #E3F2FD, #A3D3FC),
-  radial-gradient(circle at 30% 80%, white, #0077B6,white);}
+  background-image: radial-gradient(circle at 80% 10%, #bdc3c7, #2c3e50),
+  radial-gradient(circle at 30% 80%, white, #2c3e50, white)}
 .sign-in-form-content::before {
   top: -50px;
   left: -50px;

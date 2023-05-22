@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import {Apartment} from "../../models/apartment";
 import {Item} from "../../models/item";
 import {FirebaseService} from "../../services/firebase.service";
-import {getDownloadURL, getStorage, ref} from "firebase/storage";
-import firebase from "firebase/compat";
 import { User } from 'src/app/models/user';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { getAuth } from 'firebase/auth';
+import {DialogAnimationComponent} from "./dialog-animation/dialog-animation.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-main-section',
@@ -17,7 +17,9 @@ export class MainSectionComponent implements OnInit {
   @Input() apartments!: Apartment[];
   @Input() items!: Item[];
   @Input() users!:User[];
-  constructor(private firebaseService:FirebaseService,private authenticationService:AuthenticationService) {}
+  constructor(private firebaseService:FirebaseService,
+              private authenticationService:AuthenticationService,
+              public dialog: MatDialog) {}
 
   async ngOnInit() {
 
@@ -31,6 +33,13 @@ export class MainSectionComponent implements OnInit {
         return user.profilePictureUrl;
       }
       return ''
+    });
+  }
+  openDialog(apartmentId:string,ownerId:string): void {
+    this.dialog.open(DialogAnimationComponent, {
+      width: '350px',
+      delayFocusTrap:true,
+      data:{ myString: apartmentId,ownerId:ownerId}
     });
   }
 }

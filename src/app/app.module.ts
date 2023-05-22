@@ -20,6 +20,7 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
+import { DialogAnimationComponent } from './components/main-section/dialog-animation/dialog-animation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MainHoomePageComponent,
     MainSectionComponent,
     SignInComponent,
-    AddApartmentComponent],
+    AddApartmentComponent,
+    DialogAnimationComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

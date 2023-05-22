@@ -52,11 +52,13 @@ export class HeaderComponent implements OnInit {
     this.cdr.detectChanges();
     this.snackBar.openSnackBar('Goodbye! You have successfully signed out. See you soon!','close');
   }
-  getUserProfilePicture(){
+  getUserProfilePicture():string{
     this.users.forEach(user=>{
       if (user.email===this.authenticationService.getUser()?.email){
-        this.profilePictureUrl=user.profilePictureUrl;
-        return;
+        console.log(user.email + '+' + user.profilePictureUrl)
+        return user.profilePictureUrl;
+      }else {
+        return '';
       }
     });
     return '';
