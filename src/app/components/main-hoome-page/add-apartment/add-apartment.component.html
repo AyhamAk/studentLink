@@ -1,4 +1,4 @@
-<div class="add-apartment-form-popup">
+<div class="add-apartment-form-popup"  [class.visible]="isAddApartmentVisible">
   <div class="add-apartment-form-content">
     <div class="interactive-part">
       <img src="../../../../assets/interior-design-concept-illustration_114360-5217.avif" alt="Your Image Description" class="interactive-image">
@@ -31,36 +31,34 @@
                 <div class="form-group">
                   <label>Email:</label>
                   <input name="value" type="email" id="E-mail" class="form-control"
-                         placeholder="Enter your E-mail" [(ngModel)]="email" required [ngModelOptions]="{standalone: true}">
+                         placeholder="Enter your E-mail" [disabled]="true" [(ngModel)]="email" [textContent]="getCurrentUser()" required [ngModelOptions]="{standalone: true}">
                 </div>
                 <button mat-button matStepperNext>Next</button>
               </mat-step>
-              <mat-step [stepControl]="secondFormGroup" label="Apartment details">
+              <mat-step label="Apartment picture" [stepControl]="secondFormGroup">
                 <div class="form-group">
                   <label for="apartment-image">Apartment Image:</label>
                   <input id="apartment-image" type="file" accept="image/*" (change)="onImageSelected($event)" />
                   <img *ngIf="loadImageUrl" [src]="loadImageUrl" alt="Uploaded Image" class="apartment-image" />
                 </div>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup" label="Apartment details">
                 <div class="form-group">
-                  <label for="apartment-image">Apartment location:</label>
-                  <input id="apartment-location" [(ngModel)]="location" type="text" [ngModelOptions]="{standalone: true}"/>
+                  <label>Apartment location:</label>
+                  <input [(ngModel)]="location" type="text" [ngModelOptions]="{standalone: true}"/>
                 </div>
                 <div class="form-group">
-                  <label for="apartment-image">Apartment description:</label>
+                  <label>Apartment description:</label>
                   <textarea id="apartment-description" [(ngModel)]="description" type="text" [ngModelOptions]="{standalone: true}"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="apartment-image">Apartment price:</label>
+                  <label>Apartment price:</label>
                   <input id="apartment-price" [(ngModel)]="price" [ngModelOptions]="{standalone: true}"/>
                 </div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-              </mat-step>
-              <mat-step [stepControl]="secondFormGroup" label="Add">
                 <div class="form-group">
-                  <button type="submit" class="submit-btn" (click)="addNewApartment()">Confirm !</button>
+                  <a href="#" class="profile-login-link" (click)="addNewApartment()">Confirm !</a>
                 </div>
-                <button mat-button matStepperPrevious>Back</button>
               </mat-step>
             </mat-stepper>
           </form>

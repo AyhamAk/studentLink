@@ -73,24 +73,20 @@ export class ApartmentService implements OnInit {
     }
   }
 
-  async addNewApartment(owner: {
-    firstName: string;
-    lastName: string
-  }, price: number, location: string, description: string, image_download_url: string, userProfilePictureUrl: string | undefined, ownerId: string) {
-    const apartmentName = owner.firstName + ' ' + owner.lastName + ' ' + 'apartment';
-    await setDoc(doc(db, "apartments", apartmentName), {
+  async addNewApartment(owner: {firstName: string; lastName: string,Email:string | null | undefined }, price: number, location: string, description: string, image_download_url: string, userProfilePictureUrl: string | undefined, ownerId: string) {
+    await setDoc(doc(db, "apartments", location), {
       price: price,
       owner: owner,
       location: location,
       description: description,
       imageDownloadUrl: image_download_url,
       userProfilePictureUrl: userProfilePictureUrl,
-      ownerId: ownerId
+      ownerId: ownerId,
     });
   }
-  async deleteapartment(ownerName:string,ownerId: string) {
+  async deleteApartment(apartmentId:string) {
     for (const apartment of this.apartments) {
-      apartment.ownerId===ownerId?await deleteDoc(doc(db, "apartments", ownerName)):'';
+      await deleteDoc(doc(db, "apartments", apartmentId));
     }
   }
 }

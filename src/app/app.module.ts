@@ -21,6 +21,10 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { DialogAnimationComponent } from './components/main-section/dialog-animation/dialog-animation.component';
+import { LoaderComponent } from './components/main-hoome-page/loader/loader.component';
+import { SearchingLoadedComponent } from './components/main-section/searching-loaded/searching-loaded.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ConnectComponent } from './components/footer/connect/connect.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +33,11 @@ import { DialogAnimationComponent } from './components/main-section/dialog-anima
     MainSectionComponent,
     SignInComponent,
     AddApartmentComponent,
-    DialogAnimationComponent],
+    DialogAnimationComponent,
+    LoaderComponent,
+    SearchingLoadedComponent,
+    FooterComponent,
+    ConnectComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),

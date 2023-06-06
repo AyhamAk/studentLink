@@ -8,10 +8,6 @@
         <button class="menu-toggle" (click)="toggleMenu()">Menu</button>
       </div>
       <div class="header-right">
-        <div class="search-bar">
-          <input type="text" placeholder="Search...">
-          <button type="submit">Go</button>
-        </div>
         <div class="profile-login">
           <!-- Update the profile-login-link -->
           <a href="#" class="profile-login-link" *ngIf="!getCurrentUser()" (click)="openSignInForm($event)">Sign in</a>

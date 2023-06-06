@@ -13,6 +13,10 @@ import {SnackBar} from "../../../services/snackBar.service";
   styleUrls: ['./add-apartment.component.css']
 })
 export class AddApartmentComponent implements OnInit {
+  @Output() private addApartmentVisable = new EventEmitter<boolean>();
+  @Output() private loadingIndecator = new EventEmitter<boolean>();
+  @Output() private _apartmentAdded = new EventEmitter<Apartment>();
+
   get ownerId(): string {
     return this._ownerId;
   }
@@ -46,11 +50,11 @@ export class AddApartmentComponent implements OnInit {
     this._price = value;
   }
 
-  get email(): string {
-    return this._email;
+  get email(): string | null | undefined {
+    return this.getCurrentUser();
   }
 
-  set email(value: string) {
+  set email(value: string | null | undefined ) {
     this._email = value;
   }
 
@@ -96,7 +100,7 @@ export class AddApartmentComponent implements OnInit {
   private _description!: string;
   private _location = '';
   private _price: number = 0;
-  private _email = '';
+  private _email:string | null | undefined  = '';
   private _name = '';
   private _lastName = '';
   private _ownerId='';
@@ -107,7 +111,7 @@ export class AddApartmentComponent implements OnInit {
     secondCtrl: ['', Validators.required],
   });
   private _isLinear = false;
-  @Output() private _apartmentAdded = new EventEmitter<Apartment>();
+  isAddApartmentVisible: boolean=true;
 
   constructor(private _formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
@@ -117,7 +121,6 @@ export class AddApartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.cleanProperties();
-    console.log(this.authenticationService.getUser()?.email);
   }
 
   async onImageSelected(event: any) {
@@ -149,6 +152,7 @@ export class AddApartmentComponent implements OnInit {
   }
 
   closeAddApartmentForm() {
+    this.addApartmentVisable.emit(false);
     const signInFormPopup = document.querySelector('.add-apartment-form-popup') as HTMLElement;
     signInFormPopup.classList.remove('visible');
     setTimeout(() => {
@@ -163,12 +167,13 @@ export class AddApartmentComponent implements OnInit {
   }
 
   async addNewApartment() {
+    await this.loadingIndecator.emit(true);
     // this.downloadImgFromStorage('images/'+this.name+this.lastName+'.jpg','testing1')
     const storage = getStorage();
     const image_download_url = await getDownloadURL(ref(storage, 'images/' + this.name + this.lastName + '.jpg'));
     const profile_pic_image_url = await getDownloadURL(ref(storage, 'images/profilepicutes/' + this.email + '.jpg'));
     const apartment: Apartment = {
-      owner: {firstName: this.name, lastName: this.lastName},
+      owner: {firstName: this.name, lastName: this.lastName,Email:this.email},
       location: this.location,
       price: this.price,
       description: this.description,
@@ -176,9 +181,13 @@ export class AddApartmentComponent implements OnInit {
       userProfilePictureUrl:profile_pic_image_url,
       ownerId:this.ownerId
     }
-    await this._apartmentAdded.emit(apartment);
-    this.snackBar.openSnackBar('Apartment Added Successfully!','true')
+    this.cleanProperties();
     this.closeAddApartmentForm();
+    await this._apartmentAdded.emit(apartment);
+    setTimeout(() => {
+      // Code to be executed after the delay
+      // Add your logic here
+    }, 7000);
   }
 
   downloadImgFromStorage(url: string, elementId: string) {
@@ -212,5 +221,7 @@ export class AddApartmentComponent implements OnInit {
     this.loadImageUrl = '';
     this.location = '';
     this.email = '';
+    this.price=0;
   }
+
 }

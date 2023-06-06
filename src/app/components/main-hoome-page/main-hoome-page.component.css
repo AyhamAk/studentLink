@@ -11,6 +11,8 @@ body {
   font-size: 2.5em; /* Make the title bigger */
   color: #333; /* Dark gray color */
   position: relative; /* Positioning context for pseudo-element */
+  font-family: "Poppins", sans-serif;
+
 }.banner-title .highlight {
    background: #90ee90; /* Light green background */
    padding: 0 10px; /* Add some horizontal padding */
@@ -43,24 +45,31 @@ body {
 
 /* Styles for buttons */
 .btn {
-  display: inline-block;
-  padding: 12px 24px;
-  margin-right: 10px;
-  font-size: 1em;
-  text-decoration: none;
-  background: linear-gradient(to right, #bdc3c7, #2c3e50); /* Gradient from light gray to dark gray */
-  color: #fff;
-  border-radius: 50px; /* Makes the buttons look like pills */
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 
 .btn:hover {
-  background: linear-gradient(to right, #2c3e50, #1a1a1a);
-  transform: scale(1.05); /* Button grows slightly on hover */
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
   color: #fff;
-  text-decoration: none;
+  transform: translateY(-7px);
 }
+.btn:active{
+  transform: translateY(-1px);
 
+}
 /* To prevent the last button from having a right margin */
 .button-group .btn:last-child {
   margin-right: 0;
@@ -141,4 +150,7 @@ h4 {
 .ledtSide{
   padding-left: 35%;
 
+}
+::ng-deep.mat-dialog-container{
+  padding: 0!important;
 }

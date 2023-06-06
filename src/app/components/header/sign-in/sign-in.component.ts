@@ -17,6 +17,7 @@ export class SignInComponent implements OnInit {
   @Output() private profilePictureChange = new EventEmitter<string>();
 
   profilePictureUrl!:string;
+  passwordsMatch=true;
   get firstName(): string {
     return this._firstName;
   }
@@ -137,17 +138,20 @@ export class SignInComponent implements OnInit {
   }
 
   setAccount() {
-    this.authenticationService
-      .createNewAccount(this._signupEmail, this._signupPassword)
-      .then(async () => {
-        // This will only be executed if the account is created successfully.
-        this.snackBar.openSnackBar('Congrats! You created an account. NOW you can sign in', 'Close');
-        await this.addNewUser();
-      })
-      .catch(() => {
-        // This will only be executed if there's an error (e.g., email already exists).
-        this.snackBar.openSnackBar('This email is already in use. Please try another one', 'Close');
-      });
+    if (this.validatePasswords()){
+      this.authenticationService
+        .createNewAccount(this._signupEmail, this._signupPassword)
+        .then(async () => {
+          // This will only be executed if the account is created successfully.
+          this.snackBar.openSnackBar('Congrats! You created an account. NOW you can sign in', 'Close');
+          await this.addNewUser();
+          this.closeSignInForm();
+        })
+        .catch(() => {
+          // This will only be executed if there's an error (e.g., email already exists).
+          this.snackBar.openSnackBar('This email is already in use. Please try another one', 'Close');
+        });
+    }
   }
 
   logIn() {
@@ -213,5 +217,20 @@ export class SignInComponent implements OnInit {
       }
     });
     return '';
+  }
+  validatePasswords() {
+    if (this.signupPassword !== this.signupConfirmPassword) {
+      this.passwordsMatch = false;
+      return false;
+    }
+
+    this.passwordsMatch = true;
+    return true;
+  }
+  onSubmit() {
+    if (this.validatePasswords()) {
+      alert('good')
+    } else {
+      alert('bad')    }
   }
 }

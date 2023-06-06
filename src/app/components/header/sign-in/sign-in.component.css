@@ -21,7 +21,7 @@
 }
 
 .sign-in-form-content {
-  height: 450px;
+  height: 650px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -229,7 +229,7 @@ form .form-control {
    height: 100%;
 }
 .formContainer{
-  height: 450px;
+  height: 630px;
 }
 .custom-snackbar {
   background-color: #4caf50; /* Change the background color */
@@ -280,4 +280,36 @@ form .form-control {
 .apartment-image{
   width: 110px;
   height: 90px;
+}
+.profile-login-link {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.profile-login-link:hover {
+  background-color: #388e3c;
+  border-color: #388e3c;
+}
+
+.profile-login-link:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+  background-size: cover;
+}
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 }

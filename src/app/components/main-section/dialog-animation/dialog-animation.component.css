@@ -1,0 +1,55 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.dialog-content {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.dialog-content-owner {
+  font-weight: 600;
+}
+
+.dialog-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px; /* Increased border radius for pill-like buttons */
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+.dialog-button:hover {
+  transform: scale(1.05); /* Button will slightly enlarge when hovered over */
+}
+
+.dialog-button-cancel {
+  background-color: #bbb;
+  color: #222;
+}
+
+.dialog-button-cancel:hover {
+  background-color: #999; /* Button will darken when hovered over */
+}
+
+.dialog-button-delete {
+  background-color: #f44336; /* A shade of red */
+  color: white;
+}
+
+.dialog-button-delete:hover {
+  background-color: #d32f2f; /* Button will darken when hovered over */
+}

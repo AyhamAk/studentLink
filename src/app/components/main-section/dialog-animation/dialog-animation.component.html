@@ -1,0 +1,25 @@
+<div class="dialog-container">
+  <!-- Dialog Title -->
+  <h2 class="dialog-title">
+    Delete File?
+  </h2>
+
+  <!-- Dialog Content -->
+  <div class="dialog-content">
+    <p>
+      Are you sure you want to delete the file owned by <span class="dialog-content-owner">{{data.owner}}</span>?
+    </p>
+  </div>
+
+  <!-- Dialog Actions -->
+  <div class="dialog-actions">
+    <!-- Cancel Button -->
+    <button class="dialog-button dialog-button-cancel" mat-dialog-close>
+      Cancel
+    </button>
+    <!-- Delete Button -->
+    <button class="dialog-button dialog-button-delete" (click)="deleteapartment()" mat-dialog-close>
+      Delete
+    </button>
+  </div>
+</div>
